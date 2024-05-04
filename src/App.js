@@ -20,7 +20,6 @@ export default function App() {
 
   const handleChange=(e)=>{
     setSearchCountry(e.target.value);
-    console.log(searchCountry);
   }
 
   const filteredCountries = country.filter(country => {
