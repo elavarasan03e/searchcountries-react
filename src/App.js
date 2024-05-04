@@ -12,7 +12,7 @@ export default function App() {
         .then(res=>res.json())
         .then(data=>setCountry(data));
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.log("Error fetching data:", error);
       }
     };
     fetchData();
