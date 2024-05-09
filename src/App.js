@@ -9,10 +9,21 @@ export default function App() {
     const fetchData = async () => {
       try {
         fetch("https://restcountries.com/v3.1/all")
-        .then(res=>res.json())
-        .then(data=>setCountry(data));
+        .then(res=> {
+          if(!res.ok){
+            throw new Error('Failed to fetch countries')
+          }else{
+            return res.json();
+          }
+        })
+        .then(data=>setCountry(data))
+        .catch(err=> {
+          console.error('Error fetching countries:', err);
+          setCountry([]);
+        });
       } catch (error) {
-        console.log(error.message);
+        console.error('Error fetching countries: ',error);
+        setCountry([])
       }
     };
     fetchData();
@@ -20,6 +31,7 @@ export default function App() {
 
   const handleChange=(e)=>{
     setSearchCountry(e.target.value);
+    console.log(searchCountry);
   }
 
   const filteredCountries = country.filter(country => {
